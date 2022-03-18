@@ -1,12 +1,13 @@
 package minizeldagame;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
 public class World {
 	
-	public List<Block> blocos = new ArrayList<Block>();
+	public static List<Block> blocos = new ArrayList<Block>();
 	
 	public World() {
 		for(int x = 0; x < (Game.WIDTH*Game.SCALE/32); x++) {
@@ -22,5 +23,15 @@ public class World {
 		for(int i = 0; i < blocos.size(); i++) {
 			blocos.get(i).render(g);
 		}
+	}
+	public static boolean isFree(int x, int y) {
+		boolean free = true;
+		for(int i = 0; i < blocos.size(); i++){
+			Block blocoAtual = blocos.get(i);
+			if(blocoAtual.intersects(new Rectangle(x, y, 32, 32))) {
+				free = false;
+			}
+		}
+		return free;
 	}
 }

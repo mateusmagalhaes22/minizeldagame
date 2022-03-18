@@ -22,7 +22,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		this.addKeyListener(this);
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		world = new World();
-		player = new Player(32, 32);
+		player = new Player(64, 64);
 	}
 
 	public static void main(String[] args) {
