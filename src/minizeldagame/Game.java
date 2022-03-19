@@ -23,6 +23,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		this.setPreferredSize(new Dimension(WIDTH*SCALE, HEIGHT*SCALE));
 		world = new World();
 		player = new Player(64, 64);
+		new SpriteSheet();
 	}
 
 	public static void main(String[] args) {
@@ -59,7 +60,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			return;
 		}
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.black);
+		g.setColor(new Color(0, 150, 13));
 		g.fillRect(0,0,WIDTH*SCALE,HEIGHT*SCALE);
 		player.render(g);
 		world.render(g);

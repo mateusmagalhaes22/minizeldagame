@@ -1,6 +1,5 @@
 package minizeldagame;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
@@ -10,10 +9,7 @@ public class Block extends Rectangle{
 		super(x, y, 32, 32);
 	}
 	public void render(Graphics g) {
-		g.setColor(Color.magenta);
-		g.fillRect(x, y, width, height);
-		g.setColor(Color.DARK_GRAY);
-		g.drawRect(x, y, width, height);
+		g.drawImage(SpriteSheet.tileWall, x, y, 32, 32, null);
 	}
 
 }
