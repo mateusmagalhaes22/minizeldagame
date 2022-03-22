@@ -64,17 +64,21 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		g.fillRect(0,0,WIDTH*SCALE,HEIGHT*SCALE);
 		player.render(g);
 		world.render(g);
+		for(Bullets bullet:player.bullets) {
+			bullet.render(g);
+		}
 		bs.show();
 	}
 
 	private void tick() {
 		player.tick();
-		
+		for(Bullets bullet:player.bullets) {
+			bullet.tick();
+		}
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
 		
 	}
 
@@ -90,7 +94,17 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		}else if(e.getKeyCode()== KeyEvent.VK_DOWN) {
 			player.down = true;
 		}
-		
+		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
+			if(player.spriteAtual == SpriteSheet.player_front[1]||player.spriteAtual == SpriteSheet.player_front[0]) {
+				player.bullets.add(new Bullets(player.x+16, player.y+16, 0, 1));
+			}else if(player.spriteAtual == SpriteSheet.player_back[1]||player.spriteAtual == SpriteSheet.player_back[0]) {
+				player.bullets.add(new Bullets(player.x+16, player.y+16, 0, -1));
+			}else if(player.spriteAtual == SpriteSheet.player_left[1]||player.spriteAtual == SpriteSheet.player_left[0]) {
+				player.bullets.add(new Bullets(player.x+16, player.y+16, -1, 0));
+			}else if(player.spriteAtual == SpriteSheet.player_right[1]||player.spriteAtual == SpriteSheet.player_right[0]) {
+				player.bullets.add(new Bullets(player.x+16, player.y+16, 1, 0));
+			}
+		}
 	}
 
 	@Override

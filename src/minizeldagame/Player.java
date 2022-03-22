@@ -3,6 +3,8 @@ package minizeldagame;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Rectangle {
 	
@@ -15,6 +17,8 @@ public class Player extends Rectangle {
 	public int curAnimation;
 	public int curFrames = 0;
 	public int targetFrames = 8;
+	
+	public List<Bullets> bullets = new ArrayList<Bullets>();
 	
 	public Player(int x, int y) {
 		super(x, y, 32, 32);
