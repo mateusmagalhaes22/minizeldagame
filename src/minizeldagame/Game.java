@@ -17,6 +17,9 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	public static int SCALE = 1;
 	public Player player;
 	public World world;
+	boolean canShot = true;
+	int bulletFrames;
+	int bulletTargFrames = 60;
 	
 	public Game() {
 		this.addKeyListener(this);
@@ -72,6 +75,13 @@ public class Game extends Canvas implements Runnable, KeyListener{
 
 	private void tick() {
 		player.tick();
+		if(!canShot) {
+			bulletFrames++;
+		}
+		if(bulletFrames >= bulletTargFrames) {
+			canShot = true;
+			bulletFrames = 0;
+		}
 		for(Bullets bullet:player.bullets) {
 			bullet.tick();
 		}
@@ -95,14 +105,18 @@ public class Game extends Canvas implements Runnable, KeyListener{
 			player.down = true;
 		}
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
-			if(player.spriteAtual == SpriteSheet.player_front[1]||player.spriteAtual == SpriteSheet.player_front[0]) {
+			if((player.spriteAtual == SpriteSheet.player_front[1]||player.spriteAtual == SpriteSheet.player_front[0])&&canShot) {
 				player.bullets.add(new Bullets(player.x+16, player.y+16, 0, 1));
-			}else if(player.spriteAtual == SpriteSheet.player_back[1]||player.spriteAtual == SpriteSheet.player_back[0]) {
+				canShot = false;
+			}else if((player.spriteAtual == SpriteSheet.player_back[1]||player.spriteAtual == SpriteSheet.player_back[0])&&canShot) {
 				player.bullets.add(new Bullets(player.x+16, player.y+16, 0, -1));
-			}else if(player.spriteAtual == SpriteSheet.player_left[1]||player.spriteAtual == SpriteSheet.player_left[0]) {
+				canShot = false;
+			}else if((player.spriteAtual == SpriteSheet.player_left[1]||player.spriteAtual == SpriteSheet.player_left[0])&&canShot) {
 				player.bullets.add(new Bullets(player.x+16, player.y+16, -1, 0));
-			}else if(player.spriteAtual == SpriteSheet.player_right[1]||player.spriteAtual == SpriteSheet.player_right[0]) {
+				canShot = false;
+			}else if((player.spriteAtual == SpriteSheet.player_right[1]||player.spriteAtual == SpriteSheet.player_right[0])&&canShot) {
 				player.bullets.add(new Bullets(player.x+16, player.y+16, 1, 0));
+				canShot = false;
 			}
 		}
 	}
