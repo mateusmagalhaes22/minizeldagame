@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -20,6 +21,7 @@ public class Game extends Canvas implements Runnable, KeyListener{
 	boolean canShot = true;
 	int bulletFrames;
 	int bulletTargFrames = 60;
+	BufferedImage bSprite;
 	
 	public Game() {
 		this.addKeyListener(this);
@@ -106,16 +108,20 @@ public class Game extends Canvas implements Runnable, KeyListener{
 		}
 		if(e.getKeyCode() == KeyEvent.VK_SPACE) {
 			if((player.spriteAtual == SpriteSheet.player_front[1]||player.spriteAtual == SpriteSheet.player_front[0])&&canShot) {
-				player.bullets.add(new Bullets(player.x+16, player.y+16, 0, 1));
+				bSprite = SpriteSheet.getSprite(x, y, 15, 16);
+				player.bullets.add(new Bullets(player.x+16, player.y+16, 0, 1, bSprite));
 				canShot = false;
 			}else if((player.spriteAtual == SpriteSheet.player_back[1]||player.spriteAtual == SpriteSheet.player_back[0])&&canShot) {
-				player.bullets.add(new Bullets(player.x+16, player.y+16, 0, -1));
+				bSprite = SpriteSheet.getSprite(x, y, 15, 16);
+				player.bullets.add(new Bullets(player.x+16, player.y+16, 0, -1, bSprite));
 				canShot = false;
 			}else if((player.spriteAtual == SpriteSheet.player_left[1]||player.spriteAtual == SpriteSheet.player_left[0])&&canShot) {
-				player.bullets.add(new Bullets(player.x+16, player.y+16, -1, 0));
+				bSprite = SpriteSheet.getSprite(x, y, 16, 15);
+				player.bullets.add(new Bullets(player.x+16, player.y+16, -1, 0, bSprite));
 				canShot = false;
 			}else if((player.spriteAtual == SpriteSheet.player_right[1]||player.spriteAtual == SpriteSheet.player_right[0])&&canShot) {
-				player.bullets.add(new Bullets(player.x+16, player.y+16, 1, 0));
+				bSprite = SpriteSheet.getSprite(x, y, 16, 15);
+				player.bullets.add(new Bullets(player.x+16, player.y+16, 1, 0, bSprite));
 				canShot = false;
 			}
 		}
